@@ -7,6 +7,7 @@ import ro.ebook.model.entity.Book;
 import ro.ebook.repository.BookRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,5 +32,18 @@ public class BookServiceImpl implements BookService {
                 })
                 .collect(Collectors.toList());
         return dtoList;
+
+    }
+
+    @Override
+    public BookDto getById(Integer id) {
+        Optional<Book> book = bookRepository.findById(id);
+        return book.map((Book b) -> {
+            BookDto dto = new BookDto();
+            dto.setTitle(b.getTitle());
+            dto.setAuthor(b.getAuthor());
+            dto.setYear(b.getYear());
+            return dto;
+        }).orElse(new BookDto());
     }
 }

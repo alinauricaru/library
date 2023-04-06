@@ -7,4 +7,6 @@ import java.util.List;
 public interface BookService {
 
     List<BookDto> getBooks();
+
+    BookDto getById(Integer id);
 }
