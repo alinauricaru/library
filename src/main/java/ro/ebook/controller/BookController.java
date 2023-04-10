@@ -1,9 +1,10 @@
 package ro.ebook.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ro.ebook.model.dto.BookDto;
 import ro.ebook.service.BookService;
 
@@ -28,6 +29,14 @@ public class BookController {
         // the controller returns the dto back to the client (browser)
         return bookService.getById(bookId);
     }
+
+    @PostMapping("/books")
+    public ResponseEntity<String> create(@RequestBody @Valid BookDto dto) {
+        bookService.createBook(dto);
+        return ResponseEntity.status(201).build();
+        //TODO- return pe response erorile de validare
+    }
+
 }
 
 // JSON - JavaScript Object Notation
@@ -44,5 +53,11 @@ Tema 2:
 Create a new table authors. Map the table to an entity class Author.
 Associate an author to a book -> the Book entity will have a new property (instance variable) of type Author.
 The books table will have a new column called author_id (also create a foreign key constraint).
+
+Tema 3:
+
+Create a delete endpoint
+DELETE /books/{bookId}
+
 
  */

@@ -17,6 +17,16 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
 
     @Override
+    public Boolean createBook(BookDto dto) {
+        Book book = new Book();
+        book.setTitle(dto.getTitle());
+        book.setAuthor(dto.getAuthor());
+        book.setYear(dto.getYear());
+        Book databaseBook = bookRepository.save(book);
+        return databaseBook != null;
+    }
+
+    @Override
     public List<BookDto> getBooks() {
         // list of entity objects
         List<Book> books = bookRepository.findAll();

@@ -1,11 +1,18 @@
 package ro.ebook.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 /**
  * DTO - Data Transfer Object
  */
 public class BookDto {
 
+    @NotBlank
+    @Size(min = 3)
     private String title;
+    @NotBlank
+    @Size(min = 2)
     private String author;
     private int year;
 
